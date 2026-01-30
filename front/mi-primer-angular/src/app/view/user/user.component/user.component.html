@@ -6,14 +6,25 @@
         {{ u.name }} - {{ u.email }}
     </li>
 </ul> -->
-<div>
+<!-- <div>
     <button class="btn btn-primary mb-4"> Botón con Bootstrap</button>
 
-</div>
+</div> -->
 
-<p>Hola Mundo</p>
+@for(u of users; track u.id){
+    
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">{{ u.id }}</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">{{ u.name }}</h6>
+        <p class="card-text">{{ u.email }}</p>
+        <!-- <a href="#" class="card-link">Card link</a>
+        <a href="#" class="card-link">Another link</a> -->
+      </div>
+    </div>
+}
 
-<br>
+<!-- <p>Hola Mundo</p>
 
 <ul>
     @for (u of users; track u.id){
@@ -24,4 +35,4 @@
 <div>
 
     <button > Botón sin Bootstrap</button>
-</div>
+</div> -->
