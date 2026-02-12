@@ -16,6 +16,7 @@ Jar
 Spring web
 spring Data JPA
 PostgreSql Driver
+.\mvnw.cmd spring-boot:run
 
 para el mensaje ajustar aplication.yml al final del codigo
 ```

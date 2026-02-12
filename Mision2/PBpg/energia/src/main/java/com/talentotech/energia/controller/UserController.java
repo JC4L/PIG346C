@@ -36,6 +36,16 @@ public class UserController {
             HttpStatus.NOT_FOUND,
             "Usuario no encontrado"));
     }
+    // UPDATE
+    @PutMapping("/{id}")
+    public User update(@PathVariable Long id, @RequestBody User userDetails){
+        User user = userRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        user.setUsername(userDetails.getUsername());
+        user.setEmail(userDetails.getEmail());
+        return userRepository.save(user);
+
+    }
     
       
     
