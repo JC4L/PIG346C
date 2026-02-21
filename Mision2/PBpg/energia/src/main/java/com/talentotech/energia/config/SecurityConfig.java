@@ -20,7 +20,8 @@ public class SecurityConfig {
         http
         .csrf(csrf -> csrf.disable()) // si no se desactiva falla POST/PUT/DELETE
         .authorizeHttpRequests(auth -> auth
-        .requestMatchers("/api/users").permitAll()
+        .requestMatchers("/api/users/{id}").permitAll()
+         .requestMatchers("/api/users").permitAll()
         .requestMatchers("/api/users/login").permitAll()
         .anyRequest().authenticated())
         .formLogin(form -> form.disable())

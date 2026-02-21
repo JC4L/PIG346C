@@ -1,4 +1,5 @@
 package com.talentotech.energia.service;
+import com.talentotech.energia.dto.LoginRequest;
 import com.talentotech.energia.model.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -42,11 +43,24 @@ public class UserService {
           user.setPassword(passwordEncoder.encode(userDetails.getPassword()));
         }
             
-          user.setRole(userDetails.getRole());
+        if(userDetails.getRole()!=null)
+            user.setRole(userDetails.getRole());
         
         return userRepository.save(user);
     }
 
+    public String login(LoginRequest request){
+        Optional<User> optionalUser = userRepository.findByUsername(request.getUsername());
+        if(optionalUser.isEmpty()){
+            throw new RuntimeException("usuario no encontrado");
+        }
+        User user = optionalUser.get();
+        if(!passwordEncoder.matches(request.getPassword(),user.getPassword())){
+            throw new RuntimeException("Contraseña incorrecta");
+        }
+        return "Login correcto";
+
+    }
 
 
 }

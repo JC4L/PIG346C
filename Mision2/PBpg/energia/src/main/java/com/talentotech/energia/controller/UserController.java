@@ -1,4 +1,5 @@
 package com.talentotech.energia.controller;
+import com.talentotech.energia.dto.LoginRequest;
 import com.talentotech.energia.model.User;
 import com.talentotech.energia.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -6,6 +7,9 @@ import java.util.List;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 @RestController
 @RequestMapping("/api/users")
 
@@ -39,6 +43,14 @@ public class UserController {
         return userService.update(id, userDetails);
 
     }
+
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+        String response = userService.login(request);
+        return ResponseEntity.ok(response);
+    }
+    
     
       
     
