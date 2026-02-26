@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import com.talentotech.energia.repository.UserRepository;
+import com.talentotech.energia.exception.ResourceNotFoundException;
 @Service
 public class UserService {
     private final UserRepository userRepository;
@@ -52,11 +53,11 @@ public class UserService {
     public String login(LoginRequest request){
         Optional<User> optionalUser = userRepository.findByUsername(request.getUsername());
         if(optionalUser.isEmpty()){
-            throw new RuntimeException("usuario no encontrado");
+            throw new ResourceNotFoundException("usuario no encontrado");
         }
         User user = optionalUser.get();
         if(!passwordEncoder.matches(request.getPassword(),user.getPassword())){
-            throw new RuntimeException("Contraseña incorrecta");
+            throw new ResourceNotFoundException("Contraseña incorrecta");
         }
         return "Login correcto";
 
